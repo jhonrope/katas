@@ -16,11 +16,11 @@ import static org.junit.Assert.assertEquals;
 public class TheBirthdayBarTest {
 
     private final List<Integer> lista = generateInts(100000);
+
     @Rule
     public ContiPerfRule i = new ContiPerfRule();
 
     @Test
-
     public void theBirthdayBarTest() {
 
         assertEquals(0, new BirthdayBar(2, 4, asList()).countBreakingWays());
@@ -38,16 +38,24 @@ public class TheBirthdayBarTest {
     }
 
     @Test
-
     @PerfTest(invocations = 100, threads = 10)
     public void theBirthdayBarPerf() throws Exception {
+
+        BirthdayBar bb = new BirthdayBar(10000, 30000, lista);
+        bb.countBreakingWays2();
+
+    }
+
+    @Test
+    @PerfTest(invocations = 100, threads = 10)
+    public void theBirthdayBarOptimizedPerf() throws Exception {
 
         BirthdayBar bb = new BirthdayBar(10000, 30000, lista);
         bb.countBreakingWays();
 
     }
 
-    public List<Integer> generateInts(int length) {
+    private List<Integer> generateInts(int length) {
         Random random = new Random();
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < length; i++) {

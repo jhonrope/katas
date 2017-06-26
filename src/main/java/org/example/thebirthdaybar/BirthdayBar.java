@@ -17,7 +17,7 @@ class BirthdayBar {
         this.listSize = lista.size();
     }
 
-    int countBreakingWays() {
+    int countBreakingWays2() {
 
         int result = 0;
         for (int counter = 0; counter < listSize - window + 1; counter++)
@@ -29,11 +29,24 @@ class BirthdayBar {
 
     private int sumWindow(int from) {
         int result = 0;
-        for (int i = from; i < from + window; i++)
+        for (int i = from; i < from + window && listSize != 0; i++)
             result += list.get(i);
 
         return result;
     }
 
+    int countBreakingWays() {
+        int result = 0;
+        int sum = sumWindow(0);
+        if (sum == expectedSum)
+            result++;
 
+        for (int counter = 1; counter < listSize - window + 1; counter++) {
+            sum += list.get(counter + window - 1) - list.get(counter - 1);
+            if (sum == expectedSum)
+                result++;
+        }
+
+        return result;
+    }
 }
