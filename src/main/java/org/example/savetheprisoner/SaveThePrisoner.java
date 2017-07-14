@@ -1,11 +1,18 @@
 package org.example.savetheprisoner;
 
 
-public class SaveThePrisoner {
-    public SaveThePrisoner(int prisionerNumber) {
+class SaveThePrisoner {
+
+    private final int prisoners;
+
+    SaveThePrisoner(int prisionerNumber) {
+        this.prisoners = prisionerNumber;
     }
 
-    public int getWarning(int candiesNumber, int startingPrisioner) {
-        return 1;
+    int getWarning(int candies, int startingPrisioner) {
+        int result = startingPrisioner + candies - 1;
+        int modulo = result % prisoners;
+
+        return modulo == 0 ? prisoners : modulo;
     }
 }
